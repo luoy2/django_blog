@@ -13,16 +13,17 @@ def home(request):
 
 
 def detail(request, pk):
-    try:
-        post = Article.objects.get(id=str(pk))
-    except Article.DoesNotExist:
-        raise Http404
-    return render(request, 'post.html', {'post' : post})
+    post = get_object_or_404(Article, pk=pk)
+    return render(request, 'detail.html', {'post' : post})
 
 
-# class DetailView(generic.DeleteView):
-#     model = Article
-#     template_name = 'article_detail.html'
+def index(request):
+    article_lsit = Article.objects.all().order_by('-pub_date')
+    return render(request, 'index.html', {'post_list':article_lsit})
+
+class DetailView(generic.DeleteView):
+    model = Article
+    template_name = 'detail.html'
 
 # def test(request) :
 #     return render(request, 'test.html', {'current_time': datetime.now()})

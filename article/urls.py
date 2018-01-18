@@ -9,6 +9,6 @@ app_name = 'article'
 #     path('<int:question_id>/vote/', views.vote, name='vote')
 # ]
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('', views.index, name='index'),
     path('<int:pk>/', views.detail, name='detail'),
 ]

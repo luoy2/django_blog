@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Article
+from .models import *
 
 
 # class QuestionAdmin(admin.ModelAdmin):
@@ -12,23 +12,26 @@ from .models import Article
 #     model = Choice
 #     extra = 3
 
-
-class ArticleInLine(admin.TabularInline):
-    model = Article
-    extra = 3
-
-
+#
+# class ArticleInLine(admin.TabularInline):
+#     model = Tag
+#     extra = 3
+#
+#
 class ArticleAdmin(admin.ModelAdmin):
     list_filter = ['pub_date']
-    list_display = ('title', 'pub_date', 'category')
+    list_display = ('title', 'pub_date', 'modified_date', 'category')
     search_fields = ['content']
-    fieldsets = [
-        ('Title', {'fields':['title']}),
-        ('Content', {'fields':['content', 'category']}),
-    ]
+    # fieldsets = [
+    #     ('Title', {'fields':['title']}),
+    #     ('Content', {'fields':['content', 'category', 'tag']}),
+    #     ('Modified Time', {'fields':['modified_date']}),
+    # ]
     # inlines = [ArticleInLine]
 
 
 
 
 admin.site.register(Article, ArticleAdmin)
+admin.site.register(Category)
+admin.site.register(Tag)
