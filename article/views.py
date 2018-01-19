@@ -7,6 +7,9 @@ from django.urls import reverse
 from django.views import generic
 import markdown
 from datetime import datetime
+from comments.forms import CommentForm
+
+
 # Create your views here.
 # def home(request):
 #     post_list = Article.objects.all()  #获取全部的Article对象
@@ -19,7 +22,12 @@ def archives(request, year, month):
 def detail(request, pk):
     post = get_object_or_404(Article, pk=pk)
     post.content = markdown.markdown(post.content, ['extra','codehilite','toc'])
-    return render(request, 'detail.html', {'post' : post})
+    form = CommentForm()
+    comment_list = post.comments_set.all()
+    context = {'post':post,
+               'form':form,
+               'comment_list':comment_list}
+    return render(request, 'detail.html', context=context)
 
 def category(request, pk):
     cate = get_object_or_404(Category, pk=pk)

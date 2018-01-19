@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
+
 
 class Category(models.Model):
     name = models.CharField(max_length = 100)
@@ -22,6 +24,9 @@ class Article(models.Model):
     excerpt = models.TextField(blank=True)
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('article:detail', kwargs={'pk': self.pk})
 
     class Meta:  # 按时间下降排序
         ordering = ['-pub_date']
