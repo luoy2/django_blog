@@ -21,6 +21,10 @@ def archives(request, year, month):
 
 def detail(request, pk):
     post = get_object_or_404(Article, pk=pk)
+
+    # increase view by 1
+    post.increase_view()
+
     post.content = markdown.markdown(post.content, ['extra','codehilite','toc'])
     form = CommentForm()
     comment_list = post.comments_set.all()
