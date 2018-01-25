@@ -26,24 +26,20 @@
                     <div class="no-post">No Publised Blog Yet!</div>
                 {% endfor %}
 
-                <!-- 简单分页效果
+                {% if is_paginated %}
                 <div class="pagination-simple">
-                    <a href="#">上一页</a>
-                    <span class="current">第 6 页 / 共 11 页</span>
-                    <a href="#">下一页</a>
+                  <!-- 如果当前页还有上一页，显示一个上一页的按钮 -->
+                  {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">Previous Page</a>
+                  {% endif %}
+                  <!-- 显示当前页面信息 -->
+                  <span class="current">{{ page_obj.number }}/{{ paginator.num_pages }}</span>
+                  <!-- 如果当前页还有下一页，显示一个下一页的按钮 -->
+                  {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Next Page</a>
+                  {% endif %}
                 </div>
-                -->
-                <div class="pagination">
-                    <ul>
-                        <li><a href="">1</a></li>
-                        <li><a href="">...</a></li>
-                        <li><a href="">4</a></li>
-                        <li><a href="">5</a></li>
-                        <li class="current"><a href="">6</a></li>
-                        <li><a href="">7</a></li>
-                        <li><a href="">8</a></li>
-                        <li><a href="">...</a></li>
-                        <li><a href="">11</a></li>
-                    </ul>
-                </div>
+                {% endif %}
+
+
 {% endblock main %}

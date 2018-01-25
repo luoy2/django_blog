@@ -20,7 +20,7 @@ class Article(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(default=None, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    tags = models.ManyToManyField(Tag, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True, max_length=99999999999999)
     content = models.TextField(blank=True, null=True)
     excerpt = models.TextField(blank=True)
     views = models.PositiveIntegerField(default=0)
