@@ -88,7 +88,7 @@ DATABASES = {
         'NAME': 'django_myblog',
         'USER': 'django_learning',
         'PASSWORD': 'HWG*p64Ghf$wrgRVHmrZ^UUp',
-        'HOST': '0.0.0.0',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }

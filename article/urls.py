@@ -10,7 +10,7 @@ app_name = 'article'
 # ]
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
-    path('<int:pk>/', views.detail, name='detail'),
+    path('<int:pk>/', views.ArticleDetailView.as_view(), name='detail'),
     path(r'archives/<int:year>/<int:month>/', views.archives, name='archives'),
     path(r'categories/<int:pk>/', views.CategoryView.as_view(), name='category')
 ]
