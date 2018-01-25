@@ -8,7 +8,7 @@ from django.views import generic
 import markdown
 from datetime import datetime
 from comments.forms import CommentForm
-
+from django.views.generic import *
 
 # Create your views here.
 # def home(request):
@@ -33,6 +33,10 @@ def detail(request, pk):
                'comment_list':comment_list}
     return render(request, 'detail.html', context=context)
 
+
+
+
+
 def category(request, pk):
     cate = get_object_or_404(Category, pk=pk)
     post_list = Article.objects.filter(category=cate).order_by('-pub_date')
@@ -40,13 +44,33 @@ def category(request, pk):
 
 
 
+class IndexView(ListView):
+    model = Article
+    template_name = 'index.html'
+    context_object_name = 'post_list'
+
 def index(request):
     article_lsit = Article.objects.all().order_by('-pub_date')
     return render(request, 'index.html', {'post_list':article_lsit})
 
-# class DetailView(generic.DeleteView):
-#     model = Article
-#     template_name = 'detail.html'
 
-# def test(request) :
-#     return render(request, 'test.html', {'current_time': datetime.now()})
+class CategoryView(IndexView):
+    # model = Article
+    # template_name = 'index.html'
+    # context_object_name = 'post_list'
+
+    def get_queryset(self):
+        cate = get_object_or_404(Category, pk=self.kwargs.get('pk'))
+        return super().get_queryset().filter(category=cate)
+
+
+class ArticleDetailView(DetailView):
+    model = Article
+    template_name = 'detail.html'
+    context_object_name = 'post'
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        self.object.increase_views()
+        return response
+

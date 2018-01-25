@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 """my_blog URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -20,5 +21,6 @@ from django.contrib import admin
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('article.urls')),
-    path(r'', include('comments.urls'))
+    path(r'', include('comments.urls')),
+    path(r'googlea093dcff0458089b\.html', lambda x:HttpResponse("google-site-verification: googlea093dcff0458089b.html", mimetype="text/plain")),
 ]
