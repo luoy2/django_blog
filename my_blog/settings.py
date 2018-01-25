@@ -1,3 +1,4 @@
+#coding=utf-8
 """
 Django settings for my_blog project.
 
@@ -87,7 +88,7 @@ DATABASES = {
         'NAME': 'django_myblog',
         'USER': 'django_learning',
         'PASSWORD': 'HWG*p64Ghf$wrgRVHmrZ^UUp',
-        'HOST': '127.0.0.1',
+        'HOST': '0.0.0.0',
         'PORT': '3306',
     }
 }
@@ -115,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-CN'
 
 TIME_ZONE = 'UTC'
 
