@@ -23,4 +23,5 @@ urlpatterns = [
     path('', include('article.urls')),
     path(r'', include('comments.urls')),
     path(r'googlea093dcff0458089b\.html', lambda x:HttpResponse("google-site-verification: googlea093dcff0458089b.html", mimetype="text/plain")),
+    path(r'^robots\.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: ", mimetype="text/plain")),
 ]
