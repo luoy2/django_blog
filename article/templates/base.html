@@ -17,10 +17,10 @@
     <link rel="stylesheet" href="{% static 'article/css/highlights/github.css' %}">
 
     <!-- js -->
-    <script src="{ % static 'article/js/jquery-2.1.3.min.js' %}"></script>
-    <script src="{ % static 'article/js/bootstrap.min.js' %}"></script>
-    <script src="{ % static 'article/js/pace.min.js' %}"></script>
-    <script src="{ % static 'article/js/modernizr.custom.js' %}"></script>
+    <script src="{% static 'article/js/jquery-2.1.3.min.js' %}"></script>
+    <script src="{% static 'article/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'article/js/pace.min.js' %}"></script>
+    <script src="{% static 'article/js/modernizr.custom.js' %}"></script>
 </head>
 
 <body>
@@ -112,7 +112,7 @@
                     <ul>
                         {% for category in category_list %}
                         <li>
-                            <a href="{% url 'article:category' pk=category.pk%}">{{ category.name }}<span class="post-count">(13)</span></a>
+                            <a href="{% url 'article:category' pk=category.pk%}">{{ category.name }}<span class="post-count"> ({{ category.num_posts }})</span></a>
                         </li>
                         {% empty %}
                         No category yet!
@@ -188,7 +188,7 @@
     </nav>
 </div>
 
-<script src="{ % static 'article/js/script.js' %}"></script>
+<script src="{% static 'article/js/script.js' %}"></script>
 
 </body>
 </html>
