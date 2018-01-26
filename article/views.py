@@ -10,6 +10,8 @@ from datetime import datetime
 from comments.forms import CommentForm
 from django.views.generic import *
 
+from django.utils.text import slugify
+from markdown.extensions.toc import TocExtension
 
 # Create your views here.
 # def home(request):
@@ -219,7 +221,15 @@ class ArticleDetailView(DetailView):
 
     def get_object(self, queryset=None):
         post = super().get_object(queryset=None)
-        post.content = markdown.markdown(post.content, ['extra', 'codehilite', 'toc'])
+        md = markdown.Markdown(extensions=[
+            'markdown.extensions.extra',
+            'markdown.extensions.codehilite',
+            TocExtension(slugify=slugify),
+        ])
+        post.content = md.convert(post.content)
+        post.toc = md.toc
+        # post.content = markdown.markdown(post.content, ['extra', 'codehilite', 'toc'])
+        # post.toc = markdown.markdown(post.content, ['extra', 'codehilite', 'toc']).toc
         return post
 
     def get_context_data(self, **kwargs):
