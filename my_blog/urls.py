@@ -16,12 +16,13 @@ Including another URLconf
 """
 from django.urls import include, path
 from django.contrib import admin
-
+from article.feeds import AllPostsRssFeed
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('article.urls')),
     path(r'', include('comments.urls')),
     path(r'googlea093dcff0458089b.html', lambda x:HttpResponse("google-site-verification: googlea093dcff0458089b.html", content_type="text/plain")),
-    path(r'^robots.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: ", content_type="text/plain")),
+    path(r'^all/rss/$', AllPostsRssFeed(), name='rss')
+
 ]
