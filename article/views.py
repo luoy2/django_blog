@@ -1,6 +1,6 @@
 # 现在你的views.py应该是这样
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-from .models import Article, Category
+from .models import Article, Category, Tag
 from django.template import loader
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
@@ -195,6 +195,16 @@ class CategoryView(IndexView):
     def get_queryset(self):
         cate = get_object_or_404(Category, pk=self.kwargs.get('pk'))
         return super().get_queryset().filter(category=cate)
+
+class TagView(IndexView):
+    # model = Article
+    # template_name = 'index.html'
+    # context_object_name = 'post_list'
+
+    def get_queryset(self):
+        tag = get_object_or_404(Tag, pk=self.kwargs.get('pk'))
+        return super().get_queryset().filter(tags=tag)
+
 
 
 class ArticleDetailView(DetailView):
